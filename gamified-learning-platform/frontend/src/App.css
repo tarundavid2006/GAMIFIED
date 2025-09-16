@@ -1,0 +1,307 @@
+/* Main App Styles - Child-Friendly Design */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  background: #f8fafc;
+}
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Child-Friendly Interactive Elements */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.touch-target:hover {
+  transform: scale(1.05);
+}
+
+.touch-target:active {
+  transform: scale(0.95);
+}
+
+/* Button Styles */
+.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 active:scale-95;
+}
+
+.btn-success {
+  @apply bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 active:scale-95;
+}
+
+/* Card Components */
+.card {
+  @apply bg-white rounded-3xl shadow-xl p-6 transition-all duration-200;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Subject Card Animations */
+.subject-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--bg-color), var(--accent-color));
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.subject-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+}
+
+.subject-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.subject-card:hover::before {
+  opacity: 1;
+}
+
+/* Progress Indicators */
+.progress-bar {
+  @apply bg-gray-200 rounded-full h-3 overflow-hidden;
+}
+
+.progress-fill {
+  @apply h-full rounded-full transition-all duration-500 ease-out;
+  background: linear-gradient(90deg, #10B981, #34D399);
+}
+
+/* Avatar Selection */
+.avatar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.avatar-card {
+  @apply bg-white rounded-3xl p-6 shadow-lg cursor-pointer transition-all duration-200 flex flex-col items-center space-y-3;
+  border: 3px solid transparent;
+}
+
+.avatar-card:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.avatar-card.selected {
+  border-color: #4F46E5;
+  background: linear-gradient(135deg, #E0E7FF, #C7D2FE);
+}
+
+/* Level Cards */
+.level-card {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.level-card.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.level-card.completed::after {
+  content: '✅';
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 24px;
+  animation: bounce 0.6s ease;
+}
+
+.level-card:hover:not(.locked) {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Question Interface */
+.question-container {
+  @apply bg-white rounded-3xl p-8 shadow-2xl max-w-4xl mx-auto;
+  min-height: 400px;
+}
+
+.choice-button {
+  @apply bg-gradient-to-r from-blue-400 to-purple-500 text-white font-bold py-4 px-6 rounded-2xl shadow-lg transition-all duration-200 transform hover:scale-105 active:scale-95;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+}
+
+.choice-button.correct {
+  @apply from-green-400 to-green-600;
+  animation: success-pulse 0.6s ease;
+}
+
+.choice-button.incorrect {
+  @apply from-red-400 to-red-600;
+  animation: error-shake 0.6s ease;
+}
+
+/* Reward Animations */
+@keyframes success-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
+}
+
+@keyframes sparkle {
+  0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1) rotate(180deg); opacity: 1; }
+}
+
+/* Badge Styles */
+.badge {
+  @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+}
+
+.badge-common { @apply bg-gray-100 text-gray-800; }
+.badge-rare { @apply bg-blue-100 text-blue-800; }
+.badge-epic { @apply bg-purple-100 text-purple-800; }
+.badge-legendary { @apply bg-yellow-100 text-yellow-800; }
+
+/* Loading Animations */
+.loading-spinner {
+  @apply animate-spin rounded-full h-8 w-8 border-4 border-blue-500 border-t-transparent;
+}
+
+.loading-dots {
+  display: inline-flex;
+  space-between: 4px;
+}
+
+.loading-dots span {
+  @apply bg-blue-500 rounded-full w-2 h-2 animate-pulse;
+  animation-delay: calc(var(--delay) * 0.1s);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  @apply fixed bottom-0 left-0 right-0 bg-white shadow-2xl rounded-t-3xl p-4;
+  height: 80px;
+  z-index: 50;
+}
+
+.nav-item {
+  @apply flex flex-col items-center justify-center h-full px-3 py-2 rounded-2xl transition-all duration-200;
+  min-width: 60px;
+  cursor: pointer;
+}
+
+.nav-item.active {
+  @apply bg-blue-100 text-blue-600;
+}
+
+.nav-item:hover {
+  @apply bg-gray-100;
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .card {
+    @apply p-4 rounded-2xl;
+  }
+  
+  .subject-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  
+  .question-container {
+    @apply p-6 rounded-2xl mx-4;
+  }
+  
+  .choice-button {
+    @apply py-3 px-4 text-base;
+    min-height: 50px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus Styles for Keyboard Navigation */
+.touch-target:focus,
+.btn-primary:focus,
+.btn-success:focus,
+.btn-secondary:focus {
+  outline: 3px solid #4F46E5;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid #000;
+  }
+  
+  .choice-button {
+    border: 2px solid #000;
+  }
+}
